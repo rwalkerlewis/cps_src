@@ -1,0 +1,17 @@
+
+https://github.com/EarthScope/evalresp#:~:text=https%3A//github.com/earthscope/evalresp/wiki
+https://github.com/EarthScope/evalresp
+
+cd evalresp-4.0.6
+brew install libxml2
+
+or
+
+sudo port install libxml2
+
+git clone https://github.com/EarthScope/evalresp.git
+If comes as zip unzip
+else it creates an evalresp directory
+
+
+

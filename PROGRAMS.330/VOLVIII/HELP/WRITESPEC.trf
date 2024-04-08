@@ -1,0 +1,67 @@
+.de BR
+.in 0
+.in +8n
+.ti -3n
+..
+
+.Th WRITESPEC
+.S2 SUMMARY:
+Write spectra
+
+WriteSPec  [options]
+
+where options are [AM|PH|RL|IM|RLIM|AMPH] [B|O] 
+
+.S2 INPUT:
+AMplitude  : output the amplitude spectrum. An .am is appended to the file name
+.BR
+PHase      : output the phase spectrum.     A  .ph is appended to the file name
+.BR
+ReaL       : output the real part of the spectrum. A .rl is appended to the file name
+.BR
+IMaginary  : output the imaginary part of the spectrum. A .im is appended to the file name.
+.BR
+RLIM       : output the real and imaginary parts of the spectrum as separate files with .rl and .im  appended.
+.BR
+AMPH       : output the amplitude and phase parts of the spectrum as separate files with .am and .ph  appended.
+.BR
+B          : Phase is with respect to the first data point [default]
+.BR
+O          : Phase is with respect to the O (origin) marker if set
+.BR
+Note: more than one option can be on the sommand line, e.g., WRITESP AM RL
+
+.S2 DESCRIPTION:
+The traces must have had the command FFT applied. The  spectrum is be written as a trace file 
+with this command. The filename of the outfile will be the same as the trace file with a appropriate identifier appended.
+.sp
+Note that the FFT may have zero padding. Thus the user may have to do an RMEAN or TAPER before hand. the reason for this caution is that the spectrum will be affected if the added zeros effectively introduce a step at the beginning and end of the original treace.
+.sp
+To distinguish this file from a time series, the following header values are set in the output file:
+LEVEN = true, IFTYPE = IXY, B = 0, NPTS = N/2 + 1 where N is the power of two used in the FFT,
+DELTA = DF where DF = 1/N*DELTA is the frequency sampling. Only the positive frequencies are output. 
+The station and component names are preserved.
+
+All time markers are reset to an uninitialized value of -12345. The reference time and date are preserved.
+
+The DFT is comptued with respect to the first point, e.g., the B bvalue. If the O flag is set, then the DFT is multipleid by exo [ - i omega (B -O) ] to ensure the correct phase with respect tot he O marker.
+
+The resultant files are placed in the current directory.
+.S2 "SAC COMPATIBILITY:"
+
+DESCRIPTION:
+.BR
+sac2000 ( [8/8/2001 (Version 00.59.44)] ) does not have the APPEND and PREPEND options for the spectra.
+.BR
+
+
+.S2 EXAMPLES:
+.S2 "HEADER VALUES SET:"
+IFTYPE is set to IXY  which means that this is a general xy plot - we use this since sac2000 does not define a frequency series. The IXY flag checked by the PLOT command to set the horizontal axis as frequency. This isnon-standard.
+.BR
+LEVEN = true
+
+.S2 "DEFAULT"
+WRITESPEC AM
+
+.S2 "SEE ALSO":

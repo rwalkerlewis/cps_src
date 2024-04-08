@@ -1,0 +1,35 @@
+
+
+#!/bin/sh
+
+export CC=gcc
+#####
+#	Script for compiling the IRIS utilities
+#####
+DEST=../../bin
+
+
+# Use the IRIS provided libraries
+cd rdseedv5.3
+#make rdseed clean
+cp -p  rdseed.mac.x86_64 ${DEST}/rdseed
+#cd Man
+#groff -man rdseed.l -P-pletter > rdseed.ps
+#ps2pdf rdseed.ps
+#mv rdseed.pdf ../../../DOC/IRIS.pdf 
+#cd ..
+cd ..
+
+cd evalresp-5.0.1.slu
+make 
+mv src/evalresp src/xml2resp  ${DEST}
+make clean
+cd doc
+#groff -man evalresp.1 -P-pletter > evalresp.ps
+#ps2pdf  -dPDFSETTINGS=/prepress -dEmbedAllFonts=true evalresp.ps
+cp -p evalresp.pdf ../../../DOC
+#groff -man xml2resp.1 -P-pletter > xml2resp.ps
+#ps2pdf  -dPDFSETTINGS=/prepress -dEmbedAllFonts=true xml2resp.ps
+cp -p xml2resp.pdf ../../../DOC
+cd ..
+cd ..
